@@ -49,10 +49,7 @@ router.route('/updateprofile/:id').post((req, res) => {
 // return json object of profile info after finding by id
 router.route('/getprofile/:id').get((req, res) => {
     User.findById(req.params.id)
-    .then(user => {
-        console.log(user)
-        res.json(user)
-    })
+    .then(user => res.json(user))
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
