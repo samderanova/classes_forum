@@ -53,4 +53,11 @@ router.route('/getprofile/:id').get((req, res) => {
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
+// get list of all users in the class
+router.route('/getusers/:class').get((req, res) => {
+    User.find({ classes: req.params.class })
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(`Error: ${err}`))
+})
+
 module.exports = router;
