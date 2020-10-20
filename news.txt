@@ -1,0 +1,33 @@
+Currently making a MERN app, unless someone wants to do something different
+Therefore, downloaded libraries that will be installed (but haven't been installed yet; waiting 
+for the rest of the team) are:
+    Frontend:
+        react, react-dom, react-router, react-router-dom
+        any css frameworks? Sass (Node-Sass)? Maybe foundation?
+        any css libraries? Bootstrap/Material UI
+
+    Backend:
+        mongoose - allows us to create MongoDB schemas (the JSON data of users)
+        cors - Cross Origin Resource Sharing (allows us to send requests to other domains)
+        express - JS to create backend
+        dotenv - take in and use environment variables in a .env file
+        body-parser - a middleware that parses incoming request bodies
+        nodemon - automatically refreshes the localhost backend server upon saving (like React)
+        axios - a library used to send HTTP requests
+
+    Specifically, the MongoDB we plan to use is MongoDB Atlas.
+
+    Backend Notes:
+    HTTP request types:
+        GET, POST, PUT, PATCH, DELETE
+        Get - retrieve items from server/database
+        Post - create new item in the database
+        Put - update or replace item in the database
+        Patch - update or modify item in the database
+        Delete - delete item from database
+
+
+    Layout:
+        - Login page: 'https://www.url.com/login'
+        - Main home page (after logging in) 'https://www.url.com/main': we probably shouldn't include the 
+        username in the url due to security vulnerabilities
