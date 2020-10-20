@@ -16,10 +16,7 @@ const connection = mongoose.connection;
 connection.once('open', _ => console.log('Successfully connected to MongoDB database'))
     .catch(err => console.log(err));
 
-/*
-const router = require('./routes')
-app.use('/api/___', router)
+const apiRouter = require('./routes/routes');
+app.use('/api/', apiRouter)
 
-once we've established our routes we can access them by typing '/api/___/whateverroute' after the www._____.com
-*/
 app.listen(port, _ => console.log(`Server running on ${port}`));
