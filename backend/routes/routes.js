@@ -26,7 +26,7 @@ router.route('/adduser').post((req, res) => {
 // When adding users, MongoDB adds a unique id to each one. This finds a user by their MongoDB id and deletes them.
 router.route('/deleteuser/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
-        .then(_ => res.json('Player deleted'))
+        .then(_ => res.json('User deleted!'))
         .catch(err => res.status(400).json(`Error: ${err}`));
 })
 
@@ -35,6 +35,8 @@ router.route('/updateprofile/:id').post((req, res) => {
     User.findById(req.params.id)
         .then(user => {
             user.name = req.body.name,
+            user.email = req.body.email,
+            user.password = req.body.password
             user.pic = req.body.pic,
             user.major = req.body.major,
             user.year = req.body.year,
