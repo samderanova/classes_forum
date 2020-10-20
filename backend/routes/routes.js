@@ -53,9 +53,16 @@ router.route('/getprofile/:id').get((req, res) => {
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
-// get list of all users in the class
-router.route('/getusers/:class').get((req, res) => {
+// get list of all users by class
+router.route('/getusers/class/:class').get((req, res) => {
     User.find({ classes: req.params.class })
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(`Error: ${err}`))
+})
+
+// get list of all users by major
+router.route('/getusers/major/:major').get((req, res) => {
+    User.find({ major: req.params.major })
     .then(user => res.json(user))
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
