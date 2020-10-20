@@ -46,7 +46,7 @@ router.route('/updateprofile/:id').post((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
-// return json object of profile info after finding by id
+// get profile info after finding by id
 router.route('/getprofile/:id').get((req, res) => {
     User.findById(req.params.id)
     .then(user => res.json(user))
