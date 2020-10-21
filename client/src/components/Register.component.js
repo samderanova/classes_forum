@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {Button} from '@material-ui/core'
 import axios from 'axios';
 import {url} from '../index'
+import '../styles/register.scss'
 
 export default class Register extends Component {
     constructor(props) {
@@ -35,7 +38,7 @@ export default class Register extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="Register">
                 <form onSubmit={this.register}>
                     <label>Name:</label><br></br>
                     <input type="text" name="name" placeholder="John Doe" /><br></br>
@@ -60,7 +63,7 @@ export default class Register extends Component {
                     <label>Classes (exactly as from the UCI Catalogue; separate by commas)</label><br></br>
                     <input type="text" name="classes" placeholder="I&C SCI 32, MATH 2A, ENGR 7A" /><br></br>
 
-                    <input type="submit" />
+                    <div className="btns"><Button variant="contained" type="submit">Register</Button></div>
 
                 </form>
             </div>

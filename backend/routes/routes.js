@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/user.model');
+const bcrypt = require('bcryptjs');
 
 // a test get route to test if mongodb connection works
 router.route('/').get((req, res) => {
@@ -12,11 +13,14 @@ router.route('/').get((req, res) => {
 router.route('/adduser').post((req, res) => {
     // taking the request body (which is in JSON) and then assigning value to variables
     const name = req.body.name;
-    const pic = req.body.pic == '' ? 'default img' : req.body.pic;
+    const email = req.body.email;
+    var hashed = bcrypt.hashSync(req.body.password, 10) // hashes the password and sends this to the DB
+    const password = hashed;
+    const pic = req.body.pic == '' ? 'default img' : req.body.pic; // replace 'default img' with a url of a blank profile pic
     const major = req.body.major;
     const year = req.body.year;
     const classes = req.body.classes;
-    const newUser = new User({name, pic, major, year, classes});
+    const newUser = new User({name, email, password, pic, major, year, classes});
     newUser.save()
         .then(_ => res.json("User added!"))
         .catch(err => res.status(400).json(`Error: ${err}`));
@@ -36,7 +40,7 @@ router.route('/updateprofile/:id').post((req, res) => {
         .then(user => {
             user.name = req.body.name,
             user.email = req.body.email,
-            user.password = req.body.password
+            user.password = req.body.password,
             user.pic = req.body.pic,
             user.major = req.body.major,
             user.year = req.body.year,
