@@ -10,8 +10,8 @@ export default class Home extends Component {
                 <h1>Welcome!</h1>
                 <p>We're glad you're here.</p>
                 <div className="btns">
-                    <Button variant="contained"><Link to='/login'>Login</Link></Button>
-                    <Button variant="contained"><Link to='/register'>Register</Link></Button>
+                    <Link to='/login'><Button variant="contained">Login</Button></Link>
+                    <Link to='/register'><Button variant="contained">Register</Button></Link>
                 </div>
                 <p>As students begin each quarter, they flood their social media accounts with 
                     pictures of their class schedules, asking over and over again if people also
