@@ -5,6 +5,7 @@ import Home from './components/Home.component';
 import Register from './components/Register.component';
 import './App.scss';
 import Header from './components/Header.component';
+import Footer from './components/Footer.component'
 export default class App extends Component {
   render() {
     return (
@@ -13,6 +14,7 @@ export default class App extends Component {
         <Route path='/' exact component={Home} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <Footer />
       </Router>
     );
   }
