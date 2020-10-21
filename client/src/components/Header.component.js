@@ -5,8 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +27,14 @@ export default function Header() {
                 <Typography variant="h6" className={classes.title}>
                     <Link to='/' style={{color: 'white', textDecoration: 'none'}}>Forum</Link>
                 </Typography>
+                {localStorage.length > 0 ? 
+                <div>
+                  <Link to='/profile' style={{color: 'white', textDecoration: 'none'}}><Button color='inherit'>Profile</Button></Link>
+                  <Button color='inherit' onClick={_ => {localStorage.clear(); window.location.href='/';}}>Logout</Button>
+                </div>
+                : 
                 <Link to='/login' style={{color: 'white', textDecoration: 'none'}}><Button color="inherit">Login</Button></Link>
+                }
                 </Toolbar>
             </AppBar>
         </div>

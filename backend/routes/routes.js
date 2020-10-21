@@ -35,20 +35,8 @@ router.route('/deleteuser/:id').delete((req, res) => {
 })
 
 // updating profile info
-router.route('/updateprofile/:id').post((req, res) => {
-    User.findById(req.params.id)
-        .then(user => {
-            user.name = req.body.name,
-            user.email = req.body.email,
-            user.password = req.body.password,
-            user.pic = req.body.pic,
-            user.major = req.body.major,
-            user.year = req.body.year,
-            user.classes = req.body.classes
-            user.save()
-                .then(_ => res.json('User updated!'))
-                .catch(err => res.status(400).json(`Error: ${err}`))
-        })
+router.route('/updateprofile/:id').put((req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true})
         .catch(err => res.status(400).json(`Error: ${err}`))
 })
 

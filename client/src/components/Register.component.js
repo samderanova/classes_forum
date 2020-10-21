@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react'; 
 import {Button} from '@material-ui/core'
 import axios from 'axios';
 import {url} from '../index'
@@ -50,7 +49,7 @@ export default class Register extends Component {
 
                     <label>Year:</label><br></br>
                     <select name="year" id="year">
-                        <option value="freshman">Freshman</option>
+                        <option value="freshman">Freshmxn</option>
                         <option value="sophomore">Sophomore</option>
                         <option value="junior">Junior</option>
                         <option value="senior">Senior</option>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Button} from '@material-ui/core'
+import {url} from '../index'
 import '../styles/login.scss'
 const bcrypt = require('bcryptjs');
 
@@ -14,23 +15,40 @@ export default class Login extends Component {
         e.preventDefault();
         var inputs = Array.from(e.target.children).filter(child => child.outerHTML !== '<br>').filter(child => child.localName !== 'label').map(input => input.value);
         let email = inputs[0], password = inputs[1]
-        axios.get('http://localhost:5000/api')
+        axios.get(`${url}/api`)
             .then(res => {
-                for (var user of res.data) {
-                    if (user.email === email) {
-                        if (bcrypt.compareSync(password, user.password)) {
-                            // log them in; route user to the forum component
-                            console.log(true)
-                        }
-                    }
+                var infos = {}
+                for (var u of res.data) {
+                    infos[u.email] = u._id
                 }
-                document.getElementById('email').style.borderColor = 'red';
-                document.getElementById('password').style.borderColor = 'red';
-                document.getElementById('incorrectPassword').innerHTML = 'Please enter a valid email and/or password!'
+                console.log(infos)
+                if (email in infos) {
+                    console.log(true)
+                    axios.get(`${url}/api/getprofile/${infos[email]}`)
+                        .then(res => {
+                            if (bcrypt.compareSync(password, res.data.password)) {
+                                // log them in; route user to the profile component
+                                localStorage.setItem(email, true)
+                                window.location.href = '/profile'
+                            }
+                            else {
+                                document.getElementById('email').style.borderColor = 'red';
+                                document.getElementById('password').style.borderColor = 'red';
+                                document.getElementById('incorrectPassword').innerHTML = 'Please enter a valid email and/or password!'
+                            }
+                        })
+                        .catch(err => console.log(`Error: ${err}`))
+                }
+                else {
+                    document.getElementById('email').style.borderColor = 'red';
+                    document.getElementById('password').style.borderColor = 'red';
+                    document.getElementById('incorrectPassword').innerHTML = 'Please enter a valid email and/or password!'
+                }
             })
             .catch(err => console.log(err));
     }
     render() {
+        if (localStorage.length > 0) window.location.href = '/profile';
         return (
             <div className="Login">
                 <form onSubmit={this.login}>
