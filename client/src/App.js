@@ -7,6 +7,7 @@ import Header from './components/Header.component';
 import Profile from './components/Profile.component';
 import './App.scss';
 
+import Footer from './components/Footer.component'
 export default class App extends Component {
   render() {
     return (
@@ -16,6 +17,7 @@ export default class App extends Component {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/profile' component={Profile} />
+        <Footer />
       </Router>
     );
   }
