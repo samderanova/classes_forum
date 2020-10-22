@@ -50,20 +50,22 @@ export default class Login extends Component {
     render() {
         if (localStorage.length > 0) window.location.href = '/profile';
         return (
-            <div className="Login">
-                <form onSubmit={this.login}>
-                    <label>Email:</label><br></br>
-                    <input id="email" type="text" name="email" /><br></br>
-                    <label>Password:</label><br></br>
-                    <input id="password" type="password" name="password" /><br></br>
-                    <div className="submit">
-                        <p>Forgot Password?</p>
-                        <Button variant="contained" type="submit" style={{color: 'white'}}>Submit</Button>
-                    </div>
-                    
-                </form>
-                <p><Link to='/register'>Create an account</Link></p>
-                <p id="incorrectPassword" style={{color: 'red'}}></p>
+            <div>
+                <div className="Login">
+                    <form onSubmit={this.login}>
+                        <h3>Login</h3>
+                        <input id="email" type="text" name="email" placeholder="Email" /><br></br>
+                        <input id="password" type="password" name="password" placeholder="Passwprd" /><br></br>
+                        <div className="submit">
+                            <p>Forgot Password?</p>
+                            <Button variant="contained" type="submit" style={{color: 'white'}}>Submit</Button>
+                        </div>
+                        
+                    </form>
+                    <p><Link to='/register'>Create an account</Link></p>
+                    <div id="incorrectPassword" style={{color: 'red'}}></div>
+                </div>
+                <br></br>
             </div>
         )
     }

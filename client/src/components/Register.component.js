@@ -10,11 +10,7 @@ export default class Register extends Component {
         this.register = this.register.bind(this)
     }
     componentDidMount() {
-        /*axios.get('https://api.peterportal.org/rest/v0/courses/all', {
-            headers: {'Access-Control-Allow-Origin': '*'},
-        })
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))*/
+        
         
     }
     register(e) {
@@ -39,14 +35,14 @@ export default class Register extends Component {
         return (
             <div className="Register">
                 <form onSubmit={this.register}>
-                    <label>Name:</label><br></br>
-                    <input type="text" name="name" placeholder="John Doe" /><br></br>
-                    <label>Email:</label><br></br>
-                    <input type="text" name="email" placeholder="jdoe@uci.edu" /><br></br>
-
-                    <label>Major:</label><br></br>
-                    <input type="text" name="major"/><br></br>
-
+                    <h2>Register</h2>
+                    <input type="text" name="name" placeholder="Name" /><br></br>
+                    <input type="text" name="email" placeholder="Email" /><br></br>
+                    <input type="text" name="major" placeholder="Major"/><br></br>
+                    <input type="password" name="password" placeholder="Password"/><br></br>
+                    <input type="password" name="confirmpass" placeholder="Confirm Password" /><br></br><br></br>
+                    <label>Classes (exactly as from  UCI Catalogue)</label><br></br><br></br>
+                    <input type="text" name="classes" placeholder="I&C SCI 32, MATH 2A, ENGR 7A" /><br></br><br></br>
                     <label>Year:</label><br></br>
                     <select name="year" id="year">
                         <option value="freshman">Freshmxn</option>
@@ -54,13 +50,6 @@ export default class Register extends Component {
                         <option value="junior">Junior</option>
                         <option value="senior">Senior</option>
                     </select><br></br>
-                    
-                    <label>Password:</label><br></br>
-                    <input type="password" name="password" /><br></br>
-                    <label>Confirm Password:</label><br></br>
-                    <input type="password" name="confirmpass" /><br></br>
-                    <label>Classes (exactly as from the UCI Catalogue; separate by commas)</label><br></br>
-                    <input type="text" name="classes" placeholder="I&C SCI 32, MATH 2A, ENGR 7A" /><br></br>
 
                     <div className="btns"><Button variant="contained" type="submit">Register</Button></div>
 

@@ -5,9 +5,9 @@ import Home from './components/Home.component';
 import Register from './components/Register.component';
 import Header from './components/Header.component';
 import Profile from './components/Profile.component';
+import Footer from './components/Footer.component'
 import './App.scss';
 
-import Footer from './components/Footer.component'
 export default class App extends Component {
   render() {
     return (

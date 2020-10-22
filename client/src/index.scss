@@ -1,6 +1,7 @@
 $maxwidth: 400px;
 
 body {
+    position: relative;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     .MuiAppBar-colorPrimary, .MuiButton-contained {
@@ -11,11 +12,17 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .Home, .Register {
         @media only screen and (max-width: $maxwidth) {
             height: 120vh;
             padding: 0 10px;
         }
-        padding: 30px 200px;
+    }
+    .Login {
+        @media only screen and (max-width: $maxwidth) {
+            height: 90vh;
+        }
     }
     .btns button {
         border-radius: 0;

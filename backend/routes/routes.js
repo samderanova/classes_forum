@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
+const axios = require('axios');
 
 // a test get route to test if mongodb connection works
 router.route('/').get((req, res) => {
@@ -59,6 +60,12 @@ router.route('/getusers/major/:major').get((req, res) => {
     User.find({ major: req.params.major })
     .then(user => res.json(user))
     .catch(err => res.status(400).json(`Error: ${err}`))
+})
+
+router.route('/getclasses').get(res => {
+    axios.get('https://api.peterportal.org/rest/v0/courses/all')
+        .then(c => res.json(c))
+        .catch(err => res.json(err))
 })
 
 module.exports = router;
