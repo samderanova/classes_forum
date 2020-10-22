@@ -130,7 +130,7 @@ export default class Register extends Component {
                     </div>
                     <label>Year:</label><br></br>
                     <select name="year" id="year">
-                        <option value="freshman">Freshmxn</option>
+                        <option value="freshman">Freshman</option>
                         <option value="sophomore">Sophomore</option>
                         <option value="junior">Junior</option>
                         <option value="senior">Senior</option>
