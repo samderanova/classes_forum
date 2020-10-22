@@ -45,7 +45,7 @@ export default class Register extends Component {
                     <input type="text" name="classes" placeholder="I&C SCI 32, MATH 2A, ENGR 7A" /><br></br><br></br>
                     <label>Year:</label><br></br>
                     <select name="year" id="year">
-                        <option value="freshman">Freshmxn</option>
+                        <option value="freshman">Freshman</option>
                         <option value="sophomore">Sophomore</option>
                         <option value="junior">Junior</option>
                         <option value="senior">Senior</option>
