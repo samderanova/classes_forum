@@ -62,10 +62,12 @@ router.route('/getusers/major/:major').get((req, res) => {
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
-router.route('/getclasses').get(res => {
+router.route('/getclasses').get((req, response) => {
     axios.get('https://api.peterportal.org/rest/v0/courses/all')
-        .then(c => res.json(c))
-        .catch(err => res.json(err))
+    .then(res => {
+        response.send(res.data.map(c => c.department + " " + c.number).sort())
+    })
+    .catch(err => res.json(err))
 })
 
 module.exports = router;

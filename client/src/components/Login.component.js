@@ -13,17 +13,15 @@ export default class Login extends Component {
     }
     login(e) {
         e.preventDefault();
-        var inputs = Array.from(e.target.children).filter(child => child.outerHTML !== '<br>').filter(child => child.localName !== 'label').map(input => input.value);
-        let email = inputs[0], password = inputs[1]
+        var input = Array.from(document.getElementsByClassName('log-input')).map(el => el.value)
+        let email = input[0], password = input[1]
         axios.get(`${url}/api`)
             .then(res => {
                 var infos = {}
                 for (var u of res.data) {
                     infos[u.email] = u._id
                 }
-                console.log(infos)
                 if (email in infos) {
-                    console.log(true)
                     axios.get(`${url}/api/getprofile/${infos[email]}`)
                         .then(res => {
                             if (bcrypt.compareSync(password, res.data.password)) {
@@ -40,6 +38,7 @@ export default class Login extends Component {
                         .catch(err => console.log(`Error: ${err}`))
                 }
                 else {
+                    console.log('email')
                     document.getElementById('email').style.borderColor = 'red';
                     document.getElementById('password').style.borderColor = 'red';
                     document.getElementById('incorrectPassword').innerHTML = 'Please enter a valid email and/or password!'
@@ -54,8 +53,8 @@ export default class Login extends Component {
                 <div className="Login">
                     <form onSubmit={this.login}>
                         <h3>Login</h3>
-                        <input id="email" type="text" name="email" placeholder="Email" /><br></br>
-                        <input id="password" type="password" name="password" placeholder="Passwprd" /><br></br>
+                        <input className="log-input" id="email" type="text" name="email" placeholder="Email" /><br></br>
+                        <input className="log-input" id="password" type="password" name="password" placeholder="Passwprd" /><br></br>
                         <div className="submit">
                             <p>Forgot Password?</p>
                             <Button variant="contained" type="submit" style={{color: 'white'}}>Submit</Button>

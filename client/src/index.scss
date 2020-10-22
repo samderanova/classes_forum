@@ -15,7 +15,7 @@ body {
     }
     .Home, .Register {
         @media only screen and (max-width: $maxwidth) {
-            height: 120vh;
+            height: 150vh;
             padding: 0 10px;
         }
     }
