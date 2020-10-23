@@ -54,7 +54,7 @@ export default class Login extends Component {
                     <form onSubmit={this.login}>
                         <h3>Login</h3>
                         <input className="log-input" id="email" type="text" name="email" placeholder="Email" /><br></br>
-                        <input className="log-input" id="password" type="password" name="password" placeholder="Passwprd" /><br></br>
+                        <input className="log-input" id="password" type="password" name="password" placeholder="Password" /><br></br>
                         <div className="submit">
                             <p>Forgot Password?</p>
                             <Button variant="contained" type="submit" style={{color: 'white'}}>Submit</Button>

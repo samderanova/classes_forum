@@ -4,7 +4,11 @@ import {Button, CircularProgress} from '@material-ui/core';
 import axios from 'axios';
 import {url} from '../index';
 import '../styles/register.scss';
+import uci_logo from './uci_logo.png';
 
+const red_styles = {
+    color: 'red'
+}
 export default class Register extends Component {
     constructor(props) {
         super(props)
@@ -14,12 +18,14 @@ export default class Register extends Component {
         }
         this.register = this.register.bind(this)
         this.addClasses = this.addClasses.bind(this)
+        this.removeClasses = this.removeClasses.bind(this)
     }
     componentDidMount() {
         var search = document.getElementById('classes')
-        search.addEventListener('keyup', (e, s=search.value) => {
+        search.addEventListener('keyup', (e, s=search) => {
             if (e.key === 'Enter') {
-                if (s.trim() !== '') {
+                s = search.value
+                if (s !== '') {
                     ReactDOM.render(<CircularProgress />, document.getElementById('chooseClasses'))
                     axios.get(`${url}/api/getclasses`)
                     .then(res => {
@@ -52,7 +58,7 @@ export default class Register extends Component {
                 }
                 else {
                     e.target.style.border = '3px solid red';
-                    ReactDOM.render(<p style={{color: 'red'}}>Please provide a class name!</p>,
+                    ReactDOM.render(<p style={red_styles}>Please provide a class name!</p>,
                         document.getElementById('warning'))
                 }
             }
@@ -61,53 +67,78 @@ export default class Register extends Component {
     register(e) {
         e.preventDefault(); // on default, submitting the form will refresh the page; this prevents that
         // get all input elements inside the form
-        var inputs = Array.from(document.getElementsByClassName('reg-input')).map(el => el.value);
-        try {
-            axios.post(`${url}/api/adduser`, {
-                name: inputs[0],
-                email: inputs[1],
-                password: inputs[4],
-                pic: '',
-                major: inputs[2],
-                year: inputs[3],
-                classes: []
-            })
-                .then(_ => console.log('Success!'))
-                .catch(err => console.log(err))
+        var inputs = Array.from(document.getElementsByClassName('reg-input'));
+        var inputvals = inputs.map(el => el.value.trim())
+        if (this.state.chosenClasses.length === 0) {
+            document.getElementById('classes').style.border= '3px solid red';
         }
-        catch(err) {
-            for (var el of inputs) {
-                if (el.value.trim() === '') {
-                    el.style.border = '3px solid red';
-                    ReactDOM.render(<p style={{color: 'red'}}>Please make sure you fill out every field!</p>,
-                        document.getElementById('warning'))
+        axios.get(`${url}/api/`)
+            .then(res => {
+                for (var user of res.data) {
+                    if (user.email === inputvals[1]) {
+                        ReactDOM.render(<p style={red_styles}>This email has an existing account!</p>,
+                            document.getElementById('warning'))
+                            return
+                    }
                 }
-            }
-        }
+                axios.post(`${url}/api/adduser`, {
+                    name: inputvals[0],
+                    email: inputvals[1],
+                    password: inputvals[4],
+                    pic: uci_logo,
+                    major: inputvals[2],
+                    year: inputvals[3],
+                    classes: this.state.chosenClasses,
+                    contacts: {}
+                })
+                    .then(_ => console.log('Success!'))
+                    .catch(err => {
+                        console.log(err)
+                        for (var el of inputs) {
+                            if (el.innerText.trim() === '') {
+                                el.style.border = '3px solid red';
+                                ReactDOM.render(<p style={red_styles}>Please make sure you fill out every field!</p>,
+                                    document.getElementById('warning'))
+                            }
+                        }
+                    })
+            })
     }
     addClasses(e) {
         e.persist()
         this.setState((prevState) => {
             if (e.target.localName === 'button') {
-                if (prevState.chosenClasses.includes(e.target.children[0].innerHTML)) {
-                    ReactDOM.render(<p style={{color: 'red'}}>This class has already been added!</p>,
+                if (prevState.chosenClasses.includes(e.target.children[0].innerText)) {
+                    ReactDOM.render(<p style={red_styles}>This class has already been added!</p>,
                         document.getElementById('warning'))
                 }
                 else {
-                    prevState.chosenClasses.push(e.target.children[0].innerHTML)
+                    prevState.chosenClasses.push(e.target.children[0].innerText)
                     return {chosenClasses: prevState.chosenClasses}
                 }
             }
             else {
-                if (prevState.chosenClasses.includes(e.target.innerHTML)) {
-                    ReactDOM.render(<p style={{color: 'red'}}>This class has already been added!</p>,
+                if (prevState.chosenClasses.includes(e.target.innerText)) {
+                    ReactDOM.render(<p style={red_styles}>This class has already been added!</p>,
                         document.getElementById('warning'))
                 }
                 else {
-                    prevState.chosenClasses.push(e.target.innerHTML)
+                    prevState.chosenClasses.push(e.target.innerText)
                     return {chosenClasses: prevState.chosenClasses}
                 }
             }
+        })
+    }
+    removeClasses(e) {
+        e.persist()
+        this.setState((prevState) => {
+            if (e.target.localName === 'button') {
+                prevState.chosenClasses = prevState.chosenClasses.filter(c => c !== e.target.children[0].innerText)
+            }
+            else {
+                prevState.chosenClasses = prevState.chosenClasses.filter(c => c !== e.target.innerText)
+            }
+            return {chosenClasses: prevState.chosenClasses}
         })
     }
     render() {
@@ -123,9 +154,10 @@ export default class Register extends Component {
                     <label>Classes (exactly as from  UCI Catalogue)</label><br></br><br></br>
                     <input id="classes" type="search" name="classes" placeholder="e.g. I&C SCI 32"/><br></br>
                     <div id="chooseClasses"></div>
-                    <div id="chosenClasses">
+                    <div id="chosenClasses"  style={{paddingBottom: '30px'}}>
+                        <h3>Classes Added (click to remove):</h3>
                         {this.state.chosenClasses.map(el => {
-                            return <Button key={el} variant="contained">{el}</Button>
+                            return <Button key={el} variant="contained" onClick={this.removeClasses}>{el}</Button>
                         })}
                     </div>
                     <label>Year:</label><br></br>
