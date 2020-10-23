@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import zcl from './ZotConnect_Logo.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,8 +25,11 @@ export default function Header() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                    <Link to='/' style={{color: 'white', textDecoration: 'none'}}>Forum</Link>
+                <Typography variant="h6" className={classes.title} >
+                    <div>
+                      <img src={zcl} style={{width: 100, verticalAlign: 'middle'}}></img>
+                      <Link to='/' style={{color: 'white', textDecoration: 'none', verticalAlign: 'middle'}}>ZotConnect</Link>
+                    </div>
                 </Typography>
                 {localStorage.length > 0 ? 
                 <div>

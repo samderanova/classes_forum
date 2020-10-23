@@ -89,9 +89,12 @@ export default class Register extends Component {
                     major: inputvals[2],
                     year: inputvals[3],
                     classes: this.state.chosenClasses,
-                    contacts: {}
+                    contacts: {"contacts": null}
                 })
-                    .then(_ => console.log('Success!'))
+                    .then(_ => {
+                        localStorage.setItem(inputvals[1], true)
+                        window.location.href = '/profile'
+                    })
                     .catch(err => {
                         console.log(err)
                         for (var el of inputs) {

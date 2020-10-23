@@ -1,7 +1,15 @@
 .Login {
   border: 1px solid black;
   font-size: 18px;
-  margin: 120px;
+  @media only screen and (max-width: 800px) {
+    margin: 50px 20px;
+  }
+  margin: 120px 300px;
+  padding: 20px;
+  a {
+    color: #1a73e9;
+    text-decoration: none;
+  }
   input {
     font: 400 16px Arial;
     min-height: 40px;
@@ -10,16 +18,15 @@
     padding: 0 5px;
   }
   .submit {
-    p {
+    a {
       font-size: 12px;
       float: left;
     }
     button {
       float: right;
     }
-    p,
-    button {
-      display: inline;
-    }
+  }
+  #create {
+    padding: 15px 0;
   }
 }

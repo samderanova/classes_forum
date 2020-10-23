@@ -4,7 +4,6 @@ import axios from 'axios';
 import {url} from '../index'
 import {Button, CircularProgress} from '@material-ui/core';
 import FormData from 'form-data';
-import fs from 'fs';
 import '../styles/profile.scss'
 
 export default class Profile extends Component {
@@ -37,7 +36,7 @@ export default class Profile extends Component {
                             }
                         }
                     })
-                    .catch(err => console.logg(err))
+                    .catch(err => console.log(err))
             }
         }
     }
@@ -57,7 +56,6 @@ export default class Profile extends Component {
                     }
                 }
             })
-        console.log(e.target.files[0]);
     }
     componentDidMount() {
         if (localStorage.length > 0) {
@@ -89,38 +87,44 @@ export default class Profile extends Component {
                                 </div>,
                                 document.getElementById('pic')
                             )
-                            var listClasses = u.classes.map(c => <p key={c}>{c}</p>)
                             var rows = []
-                            for (var item of Object.keys(u.contacts)) {
-                                rows.push(
-                                    <tr key={item}>
-                                        <td style={{padding: 10}} >{item}</td>
-                                        <td style={{padding: 10}}>{u.contacts[item]}</td>
-                                    </tr>
-                                )
+                            if (u.contacts) {
+                                for (var item of Object.keys(u.contacts)) {
+                                    if (u.contacts[item] === null) continue
+                                    rows.push(
+                                        <tr key={item}>
+                                            <td style={{padding: 10}}>{item}</td>
+                                            <td style={{padding: 10}}>{u.contacts[item]}</td>
+                                        </tr>
+                                    )
+                                }
                             }
+                            var listClasses = u.classes.map(c => <p key={c}>{c}</p>)
                             ReactDOM.render(
-                                <div>
+                                <div style={{paddingBottom: 20}}>
                                     <h1>{u.name}</h1>
                                     <div>{listClasses}</div>
-                                    {Object.keys(u.contacts).length > 0 ? 
-                                    <table style={{
-                                        border: '1px solid black',
-                                        borderCollapse: 'collapse',
-                                        fontSize: 15,
-                                        margin: 'auto'}}>
-                                        <thead>
-                                            <tr>
-                                                <th style={{padding: 10}}>Platform</th>
-                                                <th style={{padding: 10}}>Link/Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rows}
-                                        </tbody>
-                                    </table>
+                                    {u.contacts && Object.keys(u.contacts).length > 0 ? 
+                                    <div>
+                                        <h3>Contacts</h3>
+                                        <table style={{
+                                            border: '1px solid black',
+                                            borderCollapse: 'collapse',
+                                            fontSize: 15,
+                                            margin: 'auto'}}>
+                                            <thead>
+                                                <tr>
+                                                    <th style={{padding: 10}}>Platform</th>
+                                                    <th style={{padding: 10}}>Link/Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     :
-                                        null
+                                        <p></p>
                                     }
                                     
                                 </div>,
@@ -147,7 +151,7 @@ export default class Profile extends Component {
                     <div className="settings">
                         <h2>Settings</h2>
                         <form onSubmit={this.update}>
-                            <h2>Add Contact Info</h2>
+                            <h3>Add Contact Info</h3>
                             <input className="update-input" placeholder="Platform"/><span>&nbsp;&nbsp;</span>
                             <input className="update-input" placeholder="Link/Profile Name"/>
                             <br></br><br></br>

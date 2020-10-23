@@ -1,16 +1,28 @@
 .Home {
+    background-image: url('../components/peter.jpg');
     text-align: center;
-    padding: 30px 200px;
     a {
         color: white;
         text-decoration: none;
     }
     p {
-        @media only screen and (max-width: 400px) {
+        @media only screen and (max-width: 600px) {
             font-size: 12px;
-            padding: 10px;
         }
         font-size: 18px;
         line-height: 1.75em;
+    }
+    td, th {
+        text-align: center;
+    }
+    @media only screen and (max-width: 600px) {
+        .container {
+            padding: 30px;
+        }
+    }
+    @media only screen and (min-width: 600px) {
+        .container {
+            padding: 30px 300px;
+        }
     }
 }

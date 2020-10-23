@@ -38,7 +38,6 @@ export default class Login extends Component {
                         .catch(err => console.log(`Error: ${err}`))
                 }
                 else {
-                    console.log('email')
                     document.getElementById('email').style.borderColor = 'red';
                     document.getElementById('password').style.borderColor = 'red';
                     document.getElementById('incorrectPassword').innerHTML = 'Please enter a valid email and/or password!'
@@ -47,7 +46,7 @@ export default class Login extends Component {
             .catch(err => console.log(err));
     }
     render() {
-        if (localStorage.length > 0) window.location.href = '/profile';
+        if (localStorage.length > 0) window.location.href = '/';
         return (
             <div>
                 <div className="Login">
@@ -56,12 +55,11 @@ export default class Login extends Component {
                         <input className="log-input" id="email" type="text" name="email" placeholder="Email" /><br></br>
                         <input className="log-input" id="password" type="password" name="password" placeholder="Password" /><br></br>
                         <div className="submit">
-                            <p>Forgot Password?</p>
+                            <Link to='/forgotpassword'>Forgot Password?</Link>
                             <Button variant="contained" type="submit" style={{color: 'white'}}>Submit</Button>
                         </div>
-                        
                     </form>
-                    <p><Link to='/register'>Create an account</Link></p>
+                    <Link id="create" to='/register'>Create an account</Link>
                     <div id="incorrectPassword" style={{color: 'red'}}></div>
                 </div>
                 <br></br>

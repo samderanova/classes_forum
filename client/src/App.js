@@ -5,7 +5,8 @@ import Home from './components/Home.component';
 import Register from './components/Register.component';
 import Header from './components/Header.component';
 import Profile from './components/Profile.component';
-import Footer from './components/Footer.component'
+import Footer from './components/Footer.component';
+import ForgotPassword from './components/ForgotPassword.component';
 import './App.scss';
 
 export default class App extends Component {
@@ -17,6 +18,7 @@ export default class App extends Component {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/profile' component={Profile} />
+        <Route path='/forgotpassword' component={ForgotPassword} />
         <Footer />
       </Router>
     );

@@ -24,7 +24,7 @@ router.route('/adduser').post((req, res) => {
     const contacts = req.body.contacts;
     const newUser = new User({name, email, password, pic, major, year, classes, contacts});
     newUser.save()
-        .then(_ => res.json("User added!"))
+        .then(_ => res.json("User added!" + " " + contacts))
         .catch(err => res.status(400).json(`Error: ${err}`));
 })
 

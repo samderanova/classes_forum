@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const port = 5000;  // the port doesn't necessarily matter, as long as it isn't 3000 because react is using 3000
 
 require('dotenv').config()
-
+app.use(express.static(path.join(__dirname, '../client/build')))
 app.use(cors());
 app.use(express.json());
 

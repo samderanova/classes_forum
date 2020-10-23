@@ -1,5 +1,7 @@
-$maxwidth: 400px;
-
+$maxwidth: 500px;
+$buttonwidthmobile: $maxwidth - 350px;
+$buttonwidthpc: $maxwidth - 300px;
+* { box-sizing: border-box;}
 body {
     position: relative;
     margin: 0;
@@ -7,7 +9,7 @@ body {
     .MuiAppBar-colorPrimary, .MuiButton-contained {
         background-color: #0064a4;
     }
-    .Home, .Login, .Register {
+    .Login, .Register {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -21,18 +23,19 @@ body {
     }
     .Login {
         @media only screen and (max-width: $maxwidth) {
-            height: 90vh;
+            height: 60vh;
         }
     }
     .btns button {
         border-radius: 0;
         color: white;
-        @media only screen and (max-width: 400px) { 
+        @media only screen and (max-width: $maxwidth) { 
             font-size: 12px;
-            min-width: 180px;
+            margin: 10px 0px;
+            min-width: $buttonwidthmobile;
         }
-        padding: 15px 50px;
+        min-width: $buttonwidthpc;
+        padding: 10px 30px;
         margin: 10px 25px;
-        min-width: 200px;
     }
 }
