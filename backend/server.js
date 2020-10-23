@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const port = 5000;  // the port doesn't necessarily matter, as long as it isn't 3000 because react is using 3000
+const port = process.env.PORT || 5000;  // the port doesn't necessarily matter, as long as it isn't 3000 because react is using 3000
 
 require('dotenv').config()
 app.use(express.static(path.join(__dirname, '../client/build')))

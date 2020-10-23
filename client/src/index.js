@@ -4,7 +4,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-export var url = 'http://localhost:5000'
+export var url = 'https://zotconnect-api/herokuapp.com'
 
 ReactDOM.render(
   <App />,
